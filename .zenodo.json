@@ -1,0 +1,10 @@
+{
+  "title": "Factorial staircases: a pattern in factorials, explained",
+  "upload_type": "software",
+  "description": "Source files for an expository note on the identity n! = (n-m)[(n-1)! + ... + (n-m-1)!] + (m-1)(n-1)! + ... + 1·(n-m+1)!: the LaTeX paper, Python and C verification scripts, and Lean 4 proofs. Code is MIT-licensed; the paper (paper/) is CC BY 4.0.",
+  "creators": [
+    {"name": "Sanghai, Vaibhav"}
+  ],
+  "license": "MIT",
+  "keywords": ["factorial", "factorial number system", "left factorial", "Kurepa conjecture", "derangements", "Lean 4"]
+}
