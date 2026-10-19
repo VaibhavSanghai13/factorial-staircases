@@ -1,0 +1,11 @@
+*.aux
+*.log
+*.out
+*.fls
+*.fdb_latexmk
+*.blg
+*.bbl
+__pycache__/
+lean/.lake/
+near_kurepa
+.DS_Store

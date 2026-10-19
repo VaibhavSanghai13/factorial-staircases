@@ -1,0 +1,7 @@
+cff-version: 1.2.0
+message: "If you use these files, please cite them as below."
+title: "Factorial staircases: a pattern in factorials, explained"
+type: software
+authors:
+  - family-names: Sanghai
+    given-names: Vaibhav
