@@ -5,3 +5,6 @@ type: software
 authors:
   - family-names: Sanghai
     given-names: Vaibhav
+license:
+  - MIT
+  - CC-BY-4.0

@@ -50,3 +50,8 @@ python3 make_figures.py
 ```bash
 latexmk -pdf main.tex
 ```
+
+## Licence
+
+- **Code** (`verification/`, `lean/`, and the scripts `paper/make_figures.py` and `paper/make_tables.py`): MIT License; see `LICENSE`.
+- **Paper** (`paper/main.tex`, `paper/references.bib`, `paper/main.pdf`, and the figures and tables): [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); see `paper/LICENSE`.

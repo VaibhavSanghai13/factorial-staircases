@@ -1,0 +1,11 @@
+The paper in this folder (main.tex, references.bib, main.pdf, and the figures
+and tables in figures/ and tables/) is
+
+Copyright (c) 2026 Vaibhav Sanghai
+
+and is licensed under the Creative Commons Attribution 4.0 International
+License (CC BY 4.0). To view a copy of this license, visit
+https://creativecommons.org/licenses/by/4.0/
+
+The scripts make_figures.py and make_tables.py in this folder are code and are
+covered by the MIT License in the top-level LICENSE file.
