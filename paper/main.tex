@@ -187,6 +187,9 @@ standard.
         \cite[Lemma~2.1 and Corollary~2.2]{Kellner}; see also
         Me\v{s}trovi\'c~\cite{Mestrovic} and, for recent equivalent forms of
         the conjecture, Petojevi\'c et al.~\cite{Petojevic2023}.
+  \item Proposition~\ref{prop:val}, the exact power of $p$ dividing $P_m(n)$
+        when $p\mid n-m+1$, follows from a short factorisation. We have not
+        seen it stated, but it is elementary.
   \item The primes in Table~\ref{tab:nearkurepa} can be read off from the
         residues of $!p$ modulo $p$, which are tabulated in OEIS
         A100612~\cite{A100612}. Its row $k=2$ is A258944~\cite{A258944}.
@@ -643,14 +646,76 @@ he shows $d_{n-1}\equiv d_{p-1}\pmod p$, so for $n=31\cdot373$ the criterion
 becomes $p\mid d_{p-1}-2$ for $p=31,373$; by the formula above this is
 $p\mid{!p}-{!2}$. We checked directly that $d_{11562}\equiv2\pmod{11563}$.
 
+\subsection{\texorpdfstring{The exact power of $p$ on the diagonal $j=1$}{The exact power of p on the diagonal j=1}}
+Write $v_p(x)$ for the exponent of $p$ in a nonzero integer $x$. On the
+diagonal $j=1$ of Proposition~\ref{thm:period}, that is, when $p$ divides
+$n-m+1$, the prime $p$ always divides $P_m(n)$, because $d_1=0$ (the stripes
+$m-n\equiv1$ in Figure~\ref{fig:period}). On this diagonal we can say exactly
+how often it divides.
+
+\begin{proposition}\label{prop:val}
+Let $m\ge2$, let $n\ge m+1$, and let $p$ be a prime dividing $n-m+1$. Put
+\[
+  A_m=1!+2!+\dots+(m-2)!\qquad(\text{so }A_2=0).
+\]
+If $p\nmid A_m$, then $v_p\bigl(P_m(n)\bigr)=v_p(n-m+1)$. If $p\mid A_m$, then
+$v_p\bigl(P_m(n)\bigr)>v_p(n-m+1)$. Moreover, if $m\ge p+1$, then
+$A_m\equiv{!p}-1\pmod p$, so in that range the second case happens exactly when
+$p$ divides $!p-{!1}$.
+\end{proposition}
+
+\begin{proof}
+Put $a=n-m$. For $k\ge2$ we have $a^{\overline{k}}=a(a+1)\,(a+2)^{\overline{k-2}}$,
+so
+\[
+  P_m(n)=1+a+\sum_{k=2}^{m}a^{\overline{k}}=(a+1)\,h(a),\qquad
+  h(a)=1+a\sum_{t=0}^{m-2}(a+2)^{\overline{t}}.
+\]
+Here $h$ is a polynomial with integer coefficients, and $a\equiv-1\pmod p$, so
+$h(a)\equiv h(-1)\pmod p$. Since $1^{\overline{t}}=t!$,
+\[
+  h(-1)=1-\sum_{t=0}^{m-2}t!=-A_m .
+\]
+Hence $v_p\bigl(h(a)\bigr)=0$ when $p\nmid A_m$ and $v_p\bigl(h(a)\bigr)\ge1$
+when $p\mid A_m$, and $v_p\bigl(P_m(n)\bigr)=v_p(a+1)+v_p\bigl(h(a)\bigr)$.
+Finally, if $m\ge p+1$ then every $t!$ with $t\ge p$ is divisible by $p$, so
+$A_m\equiv1!+\dots+(p-1)!={!p}-1\pmod p$.
+\end{proof}
+
+The case $m=2$ is $P_2(n)=(n-1)^2$, where the power doubles. For $m\ge p+1$,
+the exceptional primes are those in the row $k=1$ of
+Table~\ref{tab:nearkurepa}. Below $2\cdot10^6$ these are only $p=3$ and
+$p=11$. So for every other prime in that range, and every $m\ge p+1$, the
+exact power of $p$ in $P_m(n)$ is just the exact power of $p$ in $n-m+1$.
+
+\begin{remark}\label{rem:hensel}
+On the other diagonals there is a general but less explicit answer. For fixed
+$m$, $P_m(n)=f_m(n-m)$ with $f_m(x)=\sum_{k=0}^{m}x^{\overline{k}}$, a
+polynomial with integer coefficients. Suppose $f_m(a_0)\equiv0$ but
+$f_m'(a_0)\not\equiv0\pmod p$. By Hensel's lemma~\cite{Gouvea} there is a
+unique $p$-adic integer $\alpha\equiv a_0\pmod p$ with $f_m(\alpha)=0$, and
+then $v_p\bigl(P_m(n)\bigr)=v_p(n-m-\alpha)$ whenever $n-m\equiv a_0\pmod p$.
+The root $\alpha$ is in general not an integer, so this gives no closed
+formula. Among the $229$ roots $a_0\not\equiv-1$ with $3\le p<40$ and
+$2\le m<40$, all but $4$ satisfy the condition $f_m'(a_0)\not\equiv0$.
+
+A complete answer to the question ``what is $v_p(P_m(n))$?'' cannot be
+expected. For $m=n-1$ we have $P_{n-1}(n)={!n}$, and $!n\equiv{!p}\pmod p$ for
+$n\ge p$. So the statement that $v_p\bigl(P_{n-1}(n)\bigr)=0$ for every odd
+prime $p$ and every $n\ge p$ is exactly Kurepa's conjecture.
+\end{remark}
+
 % ===========================================================================
 \section{Questions for further study}\label{sec:open}
 % ===========================================================================
 
 \begin{question}
-Corollary~\ref{cor:gcd} says which primes divide $G_m(n)$, but not to which
-power. What is the exact power of $p$ dividing $P_m(n)$? What proportion of
-pairs $(m,n)$ have $G_m(n)=n-m+1$ as $n$ grows?
+Proposition~\ref{prop:val} gives the exact power of $p$ dividing $P_m(n)$
+on the diagonal $p\mid n-m+1$, and Remark~\ref{rem:hensel} gives it on the
+other diagonals at simple roots, but not in closed form. Is there an explicit
+description on some diagonal $j\ge2$, or at the roots where Hensel's lemma
+does not apply? (The case $m=n-1$ contains Kurepa's conjecture.) What
+proportion of pairs $(m,n)$ have $G_m(n)=n-m+1$ as $n$ grows?
 \end{question}
 
 \begin{question}
@@ -835,6 +900,8 @@ Lemma~\ref{lem:rising} & used in \S5c & \texttt{ascFactorial\_modEq} (Basic)\\
 Prop.~\ref{thm:period} & \S5c: primes $p<30$, $n<60$ ($17700$ cases) & \texttt{cofactor\_modEq} (Basic), \texttt{cofactor\_derangement} (Arithmetic)\\
 Cor.~\ref{cor:kellner} & \S5c: primes $p<80$ & \texttt{kellner}, \texttt{left\_factorial\_mod\_prime}, \texttt{kurepa\_iff} (Arithmetic)\\
 Cor.~\ref{cor:gcd} & \S5c: all $2\le n<60$ & last claim only: \texttt{succ\_dvd\_cofactor} (Arithmetic)\\
+Prop.~\ref{prop:val} & \S5d: primes $p<40$, $2\le m<35$ ($467973$ cases) & not formalised\\
+Remark~\ref{rem:hensel} & \S5d: primes $3\le p<40$, $2\le m<40$ & not formalised\\
 Table~\ref{tab:nearkurepa} & \texttt{near\_kurepa.c}: odd $p<2\cdot10^6$; \texttt{near\_kurepa.py}: odd $p<3\cdot10^4$ and $d_{11562}\bmod 11563$ & not formalised\\
 Prop.~\ref{thm:mixed} & \S5b: $400$ random cases and Table~\ref{tab:mixed} & identity only: \texttt{mixed\_radix\_identity} (Basic)\\
 Prop.~\ref{thm:q} & \S4: as polynomials for $n\le7$; by listing permutations for $n\le6$ & not formalised\\

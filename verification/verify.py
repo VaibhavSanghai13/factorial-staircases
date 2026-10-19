@@ -166,3 +166,48 @@ for n in range(2, 60):
         ok &= all(q <= n for q in factorint(G))
         if m >= 1: ok &= G % (n-m+1) == 0
 print("primes shared with n! (gcd corollary, n<60):", ok)
+
+# 5d. Exact power of p on the diagonal p | n-m+1 (prop:val) and Hensel (rem:hensel)
+def vp(p, N):
+    k = 0
+    while N % p == 0: N //= p; k += 1
+    return k
+def Pr(m, n):                          # P_m(n) = sum_k a^(rising k), a = n-m (no big factorials)
+    a = n - m; s = 0; t = 1
+    for k in range(m+1): s += t; t *= a + k
+    return s
+ok = all(Pr(m, n) == Pc(m, n) for n in range(2, 40) for m in range(n))
+cases = 0
+for p in primerange(2, 40):
+    for m in range(2, 35):
+        A = sum(F(k) for k in range(1, m-1))
+        for n in range(m+1, m+1+3*p**3):
+            if (n-m+1) % p: continue
+            cases += 1
+            if A % p: ok &= vp(p, Pr(m, n)) == vp(p, n-m+1)
+            else:     ok &= vp(p, Pr(m, n)) >  vp(p, n-m+1)
+        if m >= p+1: ok &= (A % p == 0) == ((sum(F(k) for k in range(p)) - 1) % p == 0)
+print(f"exact power on the diagonal p | n-m+1 ({cases} cases):", ok)
+def f_coeffs(m):                       # f_m(x) = sum_k x^(rising k), low degree first
+    c = [0]*(m+1); t = [1]
+    for k in range(m+1):
+        for i, a in enumerate(t): c[i] += a
+        nt = [0]*(len(t)+1)
+        for i, a in enumerate(t): nt[i] += a*k; nt[i+1] += a
+        t = nt
+    return c
+ev = lambda c, a, M: sum(ci*pow(a, i, M) for i, ci in enumerate(c)) % M
+simple = nonsimple = 0; ok = True
+for p in primerange(3, 40):
+    for m in range(2, 40):
+        c = f_coeffs(m); d = [i*ci for i, ci in enumerate(c)][1:]
+        for a0 in range(p-1):                       # roots other than a = -1
+            if ev(c, a0, p): continue
+            if ev(d, a0, p) == 0: nonsimple += 1; continue
+            simple += 1
+            E = 8; M = p**E; al = a0
+            for _ in range(E): al = (al - ev(c, al, M)*pow(ev(d, al, M), -1, M)) % M
+            for a in range(a0, a0 + p**3, p):
+                val = vp(p, sum(ci*a**i for i, ci in enumerate(c)))
+                ok &= val >= E or val == min(vp(p, (a-al) % M or M), E)
+print(f"Hensel: {simple} simple and {nonsimple} non-simple roots; v_p = v_p(a - alpha) at simple roots:", ok)
