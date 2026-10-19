@@ -1,5 +1,7 @@
 # Factorial staircases
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23464051.svg)](https://doi.org/10.5281/zenodo.23464051)
+
 Source files for the expository note *Factorial staircases: a pattern in factorials, explained* by Vaibhav Sanghai.
 
 The note starts from an experimental pattern:
@@ -50,6 +52,10 @@ python3 make_figures.py
 ```bash
 latexmk -pdf main.tex
 ```
+
+## Citing
+
+Cite the archived version: Vaibhav Sanghai, *Factorial staircases: a pattern in factorials, explained*, Zenodo, doi:[10.5281/zenodo.23464051](https://doi.org/10.5281/zenodo.23464051). This DOI always points to the latest release.
 
 ## Licence
 

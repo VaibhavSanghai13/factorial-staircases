@@ -2,6 +2,8 @@ cff-version: 1.2.0
 message: "If you use these files, please cite them as below."
 title: "Factorial staircases: a pattern in factorials, explained"
 type: software
+doi: 10.5281/zenodo.23464051
+repository-code: "https://github.com/VaibhavSanghai13/factorial-staircases"
 authors:
   - family-names: Sanghai
     given-names: Vaibhav
