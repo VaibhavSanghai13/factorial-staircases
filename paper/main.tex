@@ -357,6 +357,32 @@ $R_3(4)=2\cdot3!+1\cdot2!=14$ permutations come before $3214$, and
 $(4-3)(3!+2!+1!+0!)=10$ permutations come from $3214$ on; $14+10=24=4!$.
 \end{example}
 
+\begin{remark}[other reversals and colexicographic order]\label{rem:other}
+Reversing other blocks, or using the other natural order, gives nothing new.
+\begin{enumerate}
+  \item \emph{Reversing the last $m$ entries.} The permutation
+        \[v_m=1\,2\cdots(n-m)\;n\,(n-1)\cdots(n-m+1)\]
+        has Lehmer code $0,\dots,0,m-1,\dots,1,0$, so
+        $\rank(v_m)=\sum_{k=0}^{m-1}k\cdot k!=m!-1$, whatever $n$ is.
+  \item \emph{Reversing a block in the middle.} If positions $a+1,\dots,a+m$
+        are reversed, the first $a$ entries are $1,\dots,a$ and never move.
+        The permutation behaves like $w_m$ in $\Sym_{n-a}$, so its rank is
+        $R_m(n-a)$ (and $m!-1$ when $a+m=n$, by (1)).
+  \item \emph{Colexicographic order.} Here $u$ comes before $w$ if, at the
+        \emph{last} position where they differ, $u$ has the smaller entry;
+        this is dictionary order on the reversed words. The reversed word of
+        $w_m$ is $n\,(n-1)\cdots(m+1)\,1\,2\cdots m$, whose Lehmer code gives
+        colex rank $\sum_{j=m}^{n-1}j\cdot j!=n!-m!$. For $v_m$, reverse the
+        word and then replace each entry $x$ by $n+1-x$. This turns $v_m$ into
+        $w_m$ and turns colex order into dictionary order read backwards. So
+        exactly $R_m(n)$ permutations come after $v_m$ in colex order, and
+        its colex rank is $(n-m)L_m(n)-1$: Proposition~\ref{thm:lex} read from
+        the other end.
+\end{enumerate}
+So the staircase is specific to reversing a prefix in dictionary order (or,
+equivalently, a suffix in colex order).
+\end{remark}
+
 % ===========================================================================
 \section{Other multipliers}\label{sec:family}
 % ===========================================================================
@@ -622,11 +648,6 @@ $p\mid{!p}-{!2}$. We checked directly that $d_{11562}\equiv2\pmod{11563}$.
 % ===========================================================================
 
 \begin{question}
-Are there similar identities for other orders on $\Sym_n$, for example
-colexicographic order, or for reversing the \emph{last} $m$ entries?
-\end{question}
-
-\begin{question}
 Corollary~\ref{cor:gcd} says which primes divide $G_m(n)$, but not to which
 power. What is the exact power of $p$ dividing $P_m(n)$? What proportion of
 pairs $(m,n)$ have $G_m(n)=n-m+1$ as $n$ grows?
@@ -806,6 +827,7 @@ Lemma~\ref{lem:rank} & \texttt{verify.py} \S2, via Prop.~\ref{thm:lex} & not for
 Prop.~\ref{thm:identity} & \S1: all $n<40$, $0\le m\le n-1$ & \texttt{staircase\_identity} (Basic)\\
 Remark~\ref{prop:gamma} & \S5: to $60$ digits at real and complex points & \texttt{gamma\_staircase} (Arithmetic)\\
 Prop.~\ref{thm:lex} & \S2: rank for $n\le9$; all of $\Sym_n$ listed for $n\le7$ & not formalised\\
+Remark~\ref{rem:other} & \S2b: all of $\Sym_n$ listed for $n\le7$ & not formalised\\
 Prop.~\ref{thm:family} & \S3: all $n\le8$ and allowed $(m,c)$ & identity only: \texttt{family\_identity} (Basic)\\
 Cor.~\ref{cor:kurepa} & \S3, case $m=n-1$ & identity only: \texttt{left\_factorial\_endpoint} (Basic)\\
 Equation~\eqref{eq:cofactor} & used in \S5c & \texttt{bracket\_eq\_factorial\_mul\_cofactor} (Basic)\\

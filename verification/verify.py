@@ -34,6 +34,27 @@ for n in range(1,10):
             ok &= cnt==(n-m)*sum(F(n-i) for i in range(1,m+2))
 print("rank of prefix-reversal == remainder (brute force n<=7):", ok)
 
+# 2b. Other reversals and colex order (rem:other)
+ok=True
+for n in range(1,8):
+    P=list(permutations(range(1,n+1)))
+    lex={p:i for i,p in enumerate(sorted(P))}
+    colex={p:i for i,p in enumerate(sorted(P,key=lambda p:p[::-1]))}
+    L=lambda m: sum(F(n-i) for i in range(1,m+2))
+    for m in range(0,n+1):
+        w=tuple(list(range(m,0,-1))+list(range(m+1,n+1)))        # prefix reversal
+        v=tuple(list(range(1,n-m+1))+list(range(n,n-m,-1)))      # suffix reversal
+        ok &= lex[v]==F(m)-1                                      # (1)
+        ok &= colex[w]==F(n)-F(m)                                 # (3), prefix
+        if m<=n-1:
+            ok &= colex[v]==(n-m)*L(m)-1                          # (3), suffix
+            ok &= F(n)-1-colex[v]==F(n)-(n-m)*L(m)                # R_m(n) after v_m
+        for a in range(0,n-m+1):                                  # (2), middle block
+            b=tuple(list(range(1,a+1))+list(range(a+m,a,-1))+list(range(a+m+1,n+1)))
+            k=n-a
+            ok &= lex[b]==(F(k)-(k-m)*sum(F(k-i) for i in range(1,m+2)) if m<=k-1 else F(m)-1)
+print("other reversals and colex order (n<=7):", ok)
+
 # 3. Other multipliers, permutation w_{m,c} (thm:family)
 ok=True
 for n in range(2,9):
